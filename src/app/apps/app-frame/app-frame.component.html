@@ -1,2 +1,24 @@
 <app-toolbar></app-toolbar>
-<app-sidebar></app-sidebar>
+<!-- <mat-drawer-container class="drawer-container">
+  <app-sidebar></app-sidebar>
+</mat-drawer-container> -->
+<mat-drawer-container class="drawer-container">
+  <!-- Sidebar -->
+  <mat-drawer
+    class="drawer"
+    mode="side"
+    [opened]="isSidebarOpen"
+    [mode]="drawerMode"
+  >
+    <app-sidebar
+      class="sidebar"
+      (nodeClicked)="onNodeClicked()"
+    ></app-sidebar>
+  </mat-drawer>
+
+  <mat-drawer-content class="drawer-content">
+    <div class="documentation">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

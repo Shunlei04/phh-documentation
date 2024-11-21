@@ -1,0 +1,7 @@
+@use './document-background-theme.scss' as doc-background;
+@use './specific-background-theme.scss' as specific-background;
+
+@mixin apply-all-mixin($theme) {
+  // @include doc-background.apply-document-background-theme($theme);
+  // @include specific-background.apply-specific-background-theme($theme);
+}

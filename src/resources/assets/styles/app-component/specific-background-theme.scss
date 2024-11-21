@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+@mixin apply-specific-background-theme($theme) {
+  @if (mat.get-theme-type($theme) == "dark") {
+    // Dark theme styles
+    .header-toolbar {
+      color: mat.get-theme-color($theme, primary, 70);
+      background: mat.get-theme-color($theme, primary, 0); 
+    }
+    
+    .sidebar-list{
+      color: mat.get-theme-color($theme, primary, 70);
+      background: mat.get-theme-color($theme, primary, 0); 
+    }
+  } @else {
+    // Light theme styles
+    .header-toolbar {
+      color: mat.get-theme-color($theme, primary, 0);; // Darker text for better contrast
+      background: mat.get-theme-color($theme, primary, 70); // Lighter background
+    }
+
+    .sidebar-list{
+      color: mat.get-theme-color($theme, primary, 0);
+      background: mat.get-theme-color($theme, primary, 70); 
+    }
+  }
+}

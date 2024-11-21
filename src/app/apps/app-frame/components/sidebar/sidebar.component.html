@@ -1,28 +1,27 @@
-<mat-nav-list class="sidebar-list">
+<div class="sidebar-list-container">
   <mat-tree
     #tree
     [dataSource]="dataSource"
     [childrenAccessor]="childrenAccessor"
-    class="side-bar-list"
+    class="sidebar-list"
   >
-    <!-- tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
       <button mat-icon-button disabled></button>
-      {{ node.name }}
+      <span
+        class="node-label"
+        (click)="onNodeClick(node)"
+        [style.cursor]="node.route ? 'pointer' : 'default'"
+      >
+        {{ node.name }}
+      </span>
     </mat-tree-node>
 
-    <!-- tree node template for expandable nodes -->
     <mat-tree-node
       *matTreeNodeDef="let node; when: hasChild"
       matTreeNodePadding
       matTreeNodeToggle
-      [cdkTreeNodeTypeaheadLabel]="node.name"
     >
-      <button
-        mat-icon-button
-        matTreeNodeToggle
-        [attr.aria-label]="'Toggle ' + node.name"
-      >
+      <button mat-icon-button matTreeNodeToggle>
         <mat-icon class="mat-icon-rtl-mirror">
           {{ tree.isExpanded(node) ? "expand_more" : "chevron_right" }}
         </mat-icon>
@@ -30,4 +29,4 @@
       {{ node.name }}
     </mat-tree-node>
   </mat-tree>
-</mat-nav-list>
+</div>

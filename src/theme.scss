@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+@use './resources/assets/themes/default-theme.scss' as b;
+
+//mixin
+@use './resources/assets/styles/app-component/all-mixin.scss' as all;
+
+@include mat.core();
+
+// mixin
+@mixin apply-theme-colors($light, $dark) {
+  body {
+    @include mat.all-component-colors($light);
+    @include all.apply-all-mixin($light);
+  }
+
+  body[mode='dark'] {
+    background-color: black;
+    color: white;
+    @include mat.all-component-colors($dark);
+    @include all.apply-all-mixin($dark);
+  }
+}
+
+// blue
+// #region
+html,
+html[theme='blue'] {
+  $light: b.$light-theme;
+  $dark: b.$dark-theme;
+  body {
+    @include mat.all-component-themes($light);
+    @include all.apply-all-mixin($light);
+  }
+
+  body[mode='dark'] {
+    background: mat.get-theme-color($dark, primary, 0);
+    color: white;
+    @include mat.all-component-colors($dark);
+    @include all.apply-all-mixin($dark);
+  }
+}
+// #endregion

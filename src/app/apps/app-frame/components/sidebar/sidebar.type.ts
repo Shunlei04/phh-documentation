@@ -1,5 +1,5 @@
 export type SideBarListType = {
   name: string;
-  route: string;
+  route: any;
   children?: SideBarListType[];
 };

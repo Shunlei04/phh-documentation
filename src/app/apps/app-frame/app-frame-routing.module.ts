@@ -6,7 +6,25 @@ const routes: Routes = [
   {
     path: '',
     component: AppFrameComponent,
-    children: [],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'phh-proxy-guide',
+      },
+      {
+        path: 'phh-proxy-guide',
+        loadChildren: () =>
+          import('../public/documents/phh-proxy-guide/phh-proxy-guide.module').then((m) => m.PhhProxyGuideModule),
+      },
+      {
+        path: 'get-started',
+        loadComponent: () =>
+          import(
+            '../public/documents/phh-proxy-guide/geting-started/geting-started.component'
+          ).then((c) => c.GetingStartedComponent),
+      },
+    ],
   },
 ];
 

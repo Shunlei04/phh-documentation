@@ -1,43 +1,51 @@
-import { Component } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTreeModule } from '@angular/material/tree';
 import { Router } from '@angular/router';
+import { DrawerService } from '../../services/drawer/drawer.service';
 import { SideBarListType } from './sidebar.type';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
+  styleUrls: ['./sidebar.component.scss'],
+  host: { class: 'app-host' },
   standalone: true,
-  imports: [MatListModule, MatTreeModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatTreeModule],
 })
 export class SidebarComponent {
+  @Output() nodeClicked = new EventEmitter<void>();
+
+  currentComponent: any;
+
   phhDocument: SideBarListType[] = [
     {
-      name: 'PHH Proxy Guide',
-      route: '/public/documents/phh-proxy-guide',
+      name: 'DM Dashboard',
+      route: 'app/dm-dashboard',
       children: [
         {
           name: 'Getting Started',
-          route: '/public/documents/phh-proxy-guide/getting-started',
+          route: '',
         },
         {
           name: 'User Side',
-          route: '/public/documents/phh-proxy-guide/user-side',
+          route: 'public/documents/phh-proxy-guide/user-side',
+        },
+      ],
+    },
+    {
+      name: 'PHH Proxy Guide',
+      route: 'app/phh-proxy-guide',
+      children: [
+        {
+          name: 'Getting Started',
+          route: 'app/phh-proxy-guide/get-started',
         },
         {
-          name: 'Admin Side',
-          route: '/public/documents/phh-proxy-guide/admin-side',
-        },
-        {
-          name: 'About App',
-          route: '/public/documents/phh-proxy-guide/about-app',
-        },
-        {
-          name: 'Admin Guide',
-          route: '/public/documents/phh-proxy-guide/admin-guide',
+          name: 'User Side',
+          route: 'public/documents/phh-proxy-guide/user-side',
         },
       ],
     },
@@ -48,20 +56,22 @@ export class SidebarComponent {
 
   childrenAccessor = (node: SideBarListType) => node.children ?? [];
 
-  hasChild = (_: number, node: SideBarListType) => !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: SideBarListType) =>
+    !!node.children && node.children.length > 0;
 
-  constructor(private router: Router) {}
+  constructor(private drawerService: DrawerService, private router: Router) {}
 
-  onNodeClick(route: string) {
-    this.router.navigate([route]);
+  onNodeClick(node: any) {
+    this.router.navigate([node.route]);
+    this.nodeClicked.emit();
   }
 
-  // Method to check if a node is expanded
+  // Check if a node is expanded
   isExpanded(node: SideBarListType): boolean {
     return this.expandedNodes.has(node);
   }
 
-  // Method to toggle the expanded state of a node
+  // Toggle expanded state of a node
   toggleNode(node: SideBarListType): void {
     if (this.isExpanded(node)) {
       this.expandedNodes.delete(node);

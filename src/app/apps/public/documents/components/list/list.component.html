@@ -1,0 +1,8 @@
+<ul class="list" *ngIf="!ordered; else orderedList">
+  <ng-content></ng-content>
+</ul>
+<ng-template #orderedList>
+  <ol class="list">
+    <ng-content></ng-content>
+  </ol>
+</ng-template>

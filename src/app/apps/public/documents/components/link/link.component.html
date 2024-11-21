@@ -1,0 +1,10 @@
+<a
+  [href]="isExternal ? url : null"
+  [attr.target]="isExternal ? target : null"
+  [attr.rel]="isExternal ? rel : null"
+  [ngClass]="cssClass"
+  [attr.title]="tooltip"
+>
+  <ng-content></ng-content>
+  <i *ngIf="icon" class="link-icon" [ngClass]="icon"></i>
+</a>

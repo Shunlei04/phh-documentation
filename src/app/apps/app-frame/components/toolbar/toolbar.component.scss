@@ -3,12 +3,50 @@
   display: flex;
   overflow: hidden;
   align-items: center;
+  justify-content: space-between;
+  height: fit-content;
   padding: 0 16px;
   // background-color: skyblue;
+
+  @media (max-width: 768px) {
+    height: 50px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+  }
 
   .header-title {
     font-size: 1.5rem;
     font-weight: bold;
-    color: black;
+    margin: 0 30px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .toolbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-form-field {
+      margin-top: 20px;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    mat-icon {
+      margin: 0 20px;
+      cursor: pointer;
+    }
+
+    .disabled {
+      display: none;
+    }
   }
 }

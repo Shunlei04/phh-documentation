@@ -1,0 +1,29 @@
+a {
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: #0056b3;
+  }
+
+  &.primary {
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  &.secondary {
+    color: #6c757d;
+  }
+
+  &.icon {
+    display: flex;
+    align-items: center;
+
+    .link-icon {
+      margin-left: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+}

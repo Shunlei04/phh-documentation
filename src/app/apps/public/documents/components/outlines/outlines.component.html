@@ -1,0 +1,10 @@
+<nav class="outlines">
+  <h3>Outlines</h3>
+  <ul class="outline-list">
+    <li *ngFor="let section of sections">
+      <a href="javascript:void(0)" (click)="scrollToSection(section.id)">
+        {{ section.title }}
+      </a>
+    </li>
+  </ul>
+</nav>
